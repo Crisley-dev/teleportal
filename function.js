@@ -35,6 +35,14 @@ jQuery(function(){
             url: path+"insert_agd.php",
           //  data: "bla",
             dataType: "html",
+            data:{
+                "dia":jQuery('#agd_dia').val(),
+                "horario":jQuery('#agd_horario').val(),
+                "nome":jQuery('#agd_nome').val(),
+                "data_nasc":jQuery('#agd_datanasc').val(),
+                "whatsapp":jQuery('#agd_whatsapp').val(),
+                "feedback":jQuery('#agd_feedback').val()
+            },
             success: function (response) {
                 alert(response)
             }

@@ -2,7 +2,7 @@
 $msg = "";
 $msg .="<div class='container corpo'>";
 $msg .= "<div class='row'>";
-$msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Dia</label></div><input type='text' class='form-control' id='cont_dia' name='cont_dia'></div>";
+$msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Dia</label></div><input type='date' class='form-control' id='cont_dia' name='cont_dia'></div>";
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Agendamento</label></div><input type='text' class='form-control' id='cont_agend' name='cont_agend'></div>";
 $msg .= "</div>";
 $msg .= "<div class='row'>";
@@ -15,5 +15,4 @@ $msg .= "<div class='col col-sm-2 campo'><button type='button' class='btn botao 
 $msg .= "</div>";
 
 echo $msg;
-
 ?>
