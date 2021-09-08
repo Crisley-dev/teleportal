@@ -2,15 +2,11 @@
 
 try
 {
-$pdo = new PDO('mysql:host=localhost;dbname=teleportal', 'root', '', array(PDO::MYSQL_ATTR_LOCAL_INFILE => true,));
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$pdo->exec('SET NAMES "utf8"');
+    $pdo = new PDO("mysql:dbname=teleportal;host=localhost;charset=utf8;","root","");
 }
-catch (PDOException $e)
+catch(PDOException $e)
 {
-$error = 'Unable to connect to the database server' . $e ;
-include 'error.html.php';
-}
-$pdo = null;
+    throw new PDOException($e);
+} 
 
 ?>

@@ -1,10 +1,11 @@
 <?php
 /**
- *@author CRISLEY DUARTE DA SILVA <crisley.dev@gmai.com>
- *@copyright 2021 - CRISLEY DUARTE
+ *@author CRISLEY DUARTE DA SILVA <crisley.dev@gmail.com>
+ *@copyright 2021 - CRISLEY DUARTE DA SILVA
 
- */
-require_once "../../teleportal/connection.php";
+ **/
+
+require_once "connection.php";
 
 
 $dia = filter_input(INPUT_POST,'dia');
@@ -21,8 +22,9 @@ $obs = filter_input(INPUT_POST,'obs');
 
 $feedback = filter_input(INPUT_POST,'feedback');
 
-$sql = $pdo->prepare("insert into agendamentos(dia,horario,nome,data_nasc,whatsapp,obs,feedback) values(?,?,?,?,?,?,?)");
-$sql->execute([$dia,$horario,$nome,$data_nasc,$whats,$obs,$feedback]));
-$sql = null;
+
+$sql = "INSERT INTO agendamentos (dia,horario,nome,data_nasc,whatsapp,obs,feedback) VALUES (?,?,?,?,?,?,?)";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$dia,$horario,$nome,$data_nasc,$whats,$obs,$feedback]);
 
 ?>
