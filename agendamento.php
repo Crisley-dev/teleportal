@@ -16,8 +16,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <script src="../../teleportal/function.js"></script>
+<?php
+require_once "connection.php";
+$current_user = wp_get_current_user();
+$user = $current_user->data->user_login;
 
+$sql = "SELECT date_format(dia, '%d/%m/%Y') as dia,horario,nome,date_format(data_nasc,'%d/%m/%Y') as data_nasc,whatsapp,obs,feedback FROM agendamentos where usuario = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$user]);
+$data = $stmt->fetchAll();
+?>
 <body>
+        <input type="hidden" name="user" id="user" value="<?php echo $user;?>">
     <div class="container main">
 
         <table class="table table-hover nowrap" id="tb_agendamento">
@@ -31,40 +41,26 @@
                         <th>FEEDBACK</th>
                 </thead>
                 <tbody>
+                       <?php
+                       foreach($data as $dado){
+                               ?>
                         <tr name='tr-agend'>
-                                <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                <td><i class="fas fa-clock    "></i></td>
-                                <td><i class="fas fa-notes-medical    "></i></td>
-                                <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                <td><i class="fa fa-whatsapp" aria-hidden="true"></i></td>
-                                <td><i class="fa fa-paperclip" aria-hidden="true"></i></td>
-                                <td></td>
+                                <td><?php echo $dado['dia'];?></td>
+                                <td><?php echo $dado['horario'];?></td>
+                                <td><?php echo $dado['nome'];?></td>
+                                <td><?php echo $dado['data_nasc'];?></td>
+                                <td><?php echo $dado['whatsapp'];?></td>
+                                <td><?php echo $dado['obs'];?></td>
+                                <td><?php echo $dado['feedback'];?></td>
                         </tr>
-
-                        <tr name='tr-agend'>
-                                <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                <td><i class="fas fa-clock    "></i></td>
-                                <td><i class="fas fa-notes-medical    "></i></td>
-                                <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                <td><i class="fa fa-whatsapp" aria-hidden="true"></i></td>
-                                <td><i class="fa fa-paperclip" aria-hidden="true"></i></td>
-                                <td></td>
-                        </tr>
-
-
-
-                   
+                        <?php
+                       }
+                        ?>
                 </tbody>
                <footer>
-                   <div class="row">
-                       <div class="col col-sm-10"></div>
-                       <div class="col col-sm-2">
-                        
-<a href="#" class="float" id="novo">
-<i class="fa fa-plus my-float"></i>
-</a>
-                       </div>
-                   </div>
+                       <a href="#" class="float" id="novo">
+                       <i class="fa fa-plus my-float"></i>
+                       </a>
                </footer>
         </table>
         </div>

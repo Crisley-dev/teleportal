@@ -22,9 +22,12 @@ $obs = filter_input(INPUT_POST,'obs');
 
 $feedback = filter_input(INPUT_POST,'feedback');
 
+$user = filter_input(INPUT_POST,'usuario');
 
-$sql = "INSERT INTO agendamentos (dia,horario,nome,data_nasc,whatsapp,obs,feedback) VALUES (?,?,?,?,?,?,?)";
+
+$sql = "INSERT INTO agendamentos (dia,horario,nome,data_nasc,whatsapp,obs,feedback,usuario) VALUES (?,?,?,?,?,?,?,?)";
 $stmt = $pdo->prepare($sql);
-$stmt->execute([$dia,$horario,$nome,$data_nasc,$whats,$obs,$feedback]);
+$stmt->execute([$dia,$horario,$nome,$data_nasc,$whats,$obs,$feedback,$user]);
+$stmt = null;
 
 ?>

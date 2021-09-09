@@ -1,6 +1,10 @@
 <?php
+
+$user = filter_input(INPUT_POST,'user');
+
 $msg = "";
 $msg .="<div class='container corpo'>";
+
 $msg .= "<form id='form_agd' method='post' action=''>";
 $msg .= "<div class='row'>";
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Dia</label></div><input type='date' class='form-control' id='agd_dia' name='agd_dia'></div>";
@@ -11,7 +15,7 @@ $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Nome</lab
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Data Nasc.</label></div><input type='date' class='form-control' id='agd_datanasc' name='agd_datanasc'></div>";
 $msg .= "</div>";
 $msg .= "<div class='row'>";
-$msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Whatsapp <i class='fa fa-whatsapp' aria-hidden='true'></i></label></div><input type='text' class='form-control' id='agd_whatsapp' name='agd_whatsapp' placeholder='(__)_____-____' required></div>";
+$msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Whatsapp <i class='fa fa-whatsapp' aria-hidden='true'></i></label></div><input type='text' class='form-control' id='agd_whatsapp' name='agd_whatsapp' required></div>";
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Feedback</label></div><select class='form-select' name='agd_feedback' id='agd_feedback'><option value='Fechado'>Fechado</option><option value='Foi e nao fechou'>Visita sem Fechamento</option><option value='Confirmado'>Confirmado</option><option value='Retorno'>Retorno</option><option value='Cancelamento'>Cancelamento</option></select></div>";
 $msg .= "</div>";
 $msg .= "<div class='row'>";
@@ -39,7 +43,8 @@ jQuery('#insert_agd_btn').on('click',function(){
             'data_nasc':jQuery('#agd_datanasc').val(),
             'whatsapp':jQuery('#agd_whatsapp').val(),
             'obs':jQuery('#agd_obs').val(),
-            'feedback':jQuery('#agd_feedback').val()
+            'feedback':jQuery('#agd_feedback').val(),
+            'usuario': '$user'
         },
         success: function (response) {
             jQuery.alert({

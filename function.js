@@ -9,13 +9,13 @@ jQuery(function(){
                 return jQuery.ajax({
                     url: path+url,
                     dataType: type,
-                    method: method
+                    method: method,
+                    data: {'user':jQuery('#user').val()},
                 }).done(function (response) {
-                    console.log(path+'cad_agendamento.php');
                     self.setContent(response);
                     self.setTitle(title);
                 }).fail(function(){
-                    console.log(path+'cad_agendamento.php');
+                  
                     self.setContent('Something went wrong.');
                 });
             },
@@ -23,10 +23,12 @@ jQuery(function(){
             useBootstrap: false,
             type: 'orange'
         });
+        console.log(jQuery('#user').val());
     }
     jQuery('#novo').on('click',function(e){
      
-       jqDialog('cad_agendamento.php','html','GET','Cadastrar Agendamentos');
+       jqDialog('cad_agendamento.php','html','POST','Cadastrar Agendamentos');
+
     })
     
     jQuery('#ct-novo').on('click',function(){
@@ -45,10 +47,46 @@ jQuery(function(){
 
 jQuery('tr').on('click', function () { 
     let tipo = jQuery(this).attr("name");
-    let val = jQuery(this).find("td:eq(0)").text();
+    let dia = jQuery(this).find("td:eq(0)").text();
+    let horario = jQuery(this).find("td:eq(1)").text();
+    let nome = jQuery(this).find("td:eq(2)").text();
+    let data_nasc = jQuery(this).find("td:eq(3)").text();
+    let whats = jQuery(this).find("td:eq(4)").text();
+    let obs = jQuery(this).find("td:eq(5)").text();
+    let feed = jQuery(this).find("td:eq(6)").text();
+    let user = jQuery('#user').val();
+    console.log(data_nasc);
     switch (tipo){
         case 'tr-agend':
-            jqDialog('edit_agendamento.php','html','GET','Editar Agendamentos');
+            jQuery.dialog({
+                content: function () {
+                    var self = this;
+                    return jQuery.ajax({
+                        url: path+'edit_agendamento.php',
+                        dataType: 'html',
+                        method: 'post',
+                        data: {
+                            'dia':dia,
+                            'horario':horario,
+                            'nome':nome,
+                            'data_nasc':data_nasc,
+                            'whats':whats,
+                            'obs':obs,
+                            'feedback':feed,
+                            'user':user
+                     }
+                    }).done(function (response) {
+                        self.setContent(response);
+                        self.setTitle('Editar Agendamento');
+                    }).fail(function(){
+                      
+                        self.setContent('Something went wrong.');
+                    });
+                },
+                boxWidth: '70%',
+                useBootstrap: false,
+                type: 'orange'
+            });
             break;
         
         case 'tr-contatos':
