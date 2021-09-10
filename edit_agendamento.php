@@ -35,10 +35,58 @@ $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Whatsapp<
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Feedback</label></div><select class='form-select' name='agd_feedback' id='agd_feedback'><option value='$feedback'>$feedback</option><option value='Fechado'>Fechado</option><option value='Foi e nao fechou'>Visita sem Fechamento</option><option value='Confirmado'>Confirmado</option><option value='Retorno'>Retorno</option><option value='Cancelamento'>Cancelamento</option></select></div>";
 $msg .= "</div>";
 $msg .= "<div class='row'>";
+$msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Observação</label></div><input type='text' class='form-control' id='agd_obs' name='agd_obs' value='$obs'></div>";
+$msg .= "<div class='col col-sm-4 campo'></div>";
+$msg .= "<div class='row'>";
 $msg .= "<div class='col col-sm-10 campo'></div>";
-$msg .= "<div class='col col-sm-2 campo'><button type='button' class='btn botao btn-outline-success' id='botao-enviar-edit'>Salvar</button></div>";
+$msg .= "<div class='col col-sm-2 campo'><button type='button' class='btn botao btn-outline-success' id='edit_agd_btn'>Salvar</button></div>";
 $msg .= "</div>";
 
+$msg .= "<script>
+    jQuery('#edit_agd_btn').on('click',function(){
+    jQuery.ajax({
+        type: 'post',
+        url: '../../teleportal/edit_agd.php',
+        dataType: 'html',
+        data:{
+            'dia':jQuery('#agd_dia').val(),
+            'horario':jQuery('#agd_horario').val(),
+            'nome':jQuery('#agd_nome').val(),
+            'data_nasc':jQuery('#agd_datanasc').val(),
+            'whatsapp':jQuery('#agd_whatsapp').val(),
+            'obs':jQuery('#agd_obs').val(),
+            'feedback':jQuery('#agd_feedback').val(),
+            'usuario': '$user'
+        },
+        success: function (response) {
+            jQuery.alert({
+                title: 'Sucesso',
+                content: '<h3>Agendamento salvo com sucesso!</h3>'+response,
+                theme: 'green',
+                type: 'green',
+                buttons:{
+                    'OK':{
+                        text:'OK',
+                        btnClass: 'btn-green',
+                        action: function(){
+                            location.reload();
+                        }
+                    }
+                }
+            })
+        },
+        error: ()=>{
+            jQuery.alert({
+                title: 'ERROR',
+                content: '<h3>Ocorreu um erro ao tentar salvar os dados.<br/> Tente novamente ou entre em conteto com um Administrador</h3>' + response,
+                theme: 'red',
+                type: 'red'
+            })
+        }
+    });
+});
+
+</script>";
 echo $msg;
 
 ?>
