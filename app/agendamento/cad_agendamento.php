@@ -1,11 +1,20 @@
 <?php
+/**
+ * PAGINA DE MONTAGEM DO FURMILARIO DE CADASTRO DE AGENDAMENTOS. UTILIZANDO PHP, HTML E BOOTSTRAP
+ * PARA RETORNAR NUM JQUER.DIALOG DO PLUGIN jQueryConfirm.
+ */
+
+//Recebe o valor do campo User quando o usuario aciona o Botão de Novo Agendamento
 
 $user = filter_input(INPUT_POST,'user');
 
+//Montagem de formulario utilizando Strings PHP
+
+
 $msg = "";
 $msg .="<div class='container corpo'>";
-
 $msg .= "<form id='form_agd' method='post' action=''>";
+$msg .= "<input type='hidden' id='agd_user' name='agd_user' value='".$user."'>";
 $msg .= "<div class='row'>";
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Dia</label></div><input type='date' class='form-control' id='agd_dia' name='agd_dia'></div>";
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Horario</label></div><input type='time' class='form-control' id='agd_horario' name='agd_horario'></div>";
@@ -27,53 +36,11 @@ $msg .= "<div class='col col-sm-10 campo'></div>";
 $msg .= "<div class='col col-sm-2 campo'><button type='button' class='btn botao btn-outline-success' id='insert_agd_btn'>Enviar</button></div>";
 $msg .= "</form>";
 $msg .= "</div>";
-$msg .="<script>
-jQuery(function(){
-    jQuery('#agd_whatsapp').mask('(00) 90000-0000');
-})
-jQuery('#insert_agd_btn').on('click',function(){
-    jQuery.ajax({
-        type: 'post',
-        url: '../../teleportal/insert_agd.php',
-        dataType: 'html',
-        data:{
-            'dia':jQuery('#agd_dia').val(),
-            'horario':jQuery('#agd_horario').val(),
-            'nome':jQuery('#agd_nome').val(),
-            'data_nasc':jQuery('#agd_datanasc').val(),
-            'whatsapp':jQuery('#agd_whatsapp').val(),
-            'obs':jQuery('#agd_obs').val(),
-            'feedback':jQuery('#agd_feedback').val(),
-            'usuario': '$user'
-        },
-        success: function (response) {
-            jQuery.alert({
-                title: 'Sucesso',
-                content: 'Agendamento salvo com sucesso!',
-                theme: 'green',
-                type: 'green',
-                buttons:{
-                    'OK':{
-                        text:'OK',
-                        action: function(){
-                            location.reload();
-                        }
-                    }
-                }
-            })
-        },
-        error: ()=>{
-            jQuery.alert({
-                title: 'ERROR',
-                content: 'Ocorreu um erro ao tentar salvar os dados.<br/> Tente novamente ou entre em conteto com um Administrador' + response,
-                theme: 'red',
-                type: 'red'
-            })
-        }
-    });
-});
+//chama o arquivo JS responsavel pelo controle do formulario.
+$msg .= "<script src='../../teleportal/app/agendamento/js/insert.js'></script>";
 
-</script>";
+//Retorna o formulario
+
 
 echo $msg;
 

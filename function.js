@@ -1,5 +1,5 @@
 jQuery(function(){
-    let path =  '../../teleportal/';
+    let path =  '../../teleportal/app/';
     jQuery('#tb_agendamento,#tb_contatos,#tb_vendas,#tb_retorno,#tb_controle').DataTable();
 
     function jqDialog(url, type,method,title){
@@ -27,22 +27,22 @@ jQuery(function(){
     }
     jQuery('#novo').on('click',function(e){
      
-       jqDialog('cad_agendamento.php','html','POST','Cadastrar Agendamentos');
+       jqDialog('agendamento/cad_agendamento.php','html','POST','Cadastrar Agendamentos');
 
     })
     
     jQuery('#ct-novo').on('click',function(){
-        jqDialog('cad_contato.php','html','GET','Cadastrar Contatos');
+        jqDialog('contato/cad_contato.php','html','POST','Cadastrar Contatos');
    })
 
    jQuery('#vendas-novo').on('click',function(){
-        jqDialog('cad_vendas.php','html','GET','Cadastrar Vendas');
+        jqDialog('vendas/cad_vendas.php','html','GET','Cadastrar Vendas');
    })
    jQuery('#ret-novo').on('click', function () {
-       jqDialog('cad_retorno.php','html','GET','Cadastrar Retorno');
+       jqDialog('retorno/cad_retorno.php','html','GET','Cadastrar Retorno');
      })
     jQuery('#cont-novo').on('click',function(){
-        jqDialog('cad_controle.php','html','GET','Cadastrar Controle');
+        jqDialog('controle/cad_controle.php','html','GET','Cadastrar Controle');
     })
 
 jQuery('tr').on('click', function () { 
@@ -54,6 +54,7 @@ jQuery('tr').on('click', function () {
     let whats = jQuery(this).find("td:eq(4)").text();
     let obs = jQuery(this).find("td:eq(5)").text();
     let feed = jQuery(this).find("td:eq(6)").text();
+    let id = jQuery(this).find("td:eq(7)").text();
     let user = jQuery('#user').val();
     console.log(data_nasc);
     switch (tipo){
@@ -62,7 +63,7 @@ jQuery('tr').on('click', function () {
                 content: function () {
                     var self = this;
                     return jQuery.ajax({
-                        url: path+'edit_agendamento.php',
+                        url: path+'agendamento/edit_agendamento.php',
                         dataType: 'html',
                         method: 'post',
                         data: {
@@ -73,7 +74,8 @@ jQuery('tr').on('click', function () {
                             'whats':whats,
                             'obs':obs,
                             'feedback':feed,
-                            'user':user
+                            'user':user,
+                            'id':id
                      }
                     }).done(function (response) {
                         self.setContent(response);
@@ -90,17 +92,17 @@ jQuery('tr').on('click', function () {
             break;
         
         case 'tr-contatos':
-            jqDialog('edit_contatos.php','html','GET','Editar Contatos');
+            jqDialog('contato/edit_contatos.php','html','GET','Editar Contatos');
             break;
         
         case 'tr-vendas':
-            jqDialog('edit_vendas.php','html','GET','Editar Agendamentos');
+            jqDialog('vendas/edit_vendas.php','html','GET','Editar Agendamentos');
             break;
         case 'tr-retorno':
-            jqDialog('edit_retorno.php','html','GET','Editar Retornos');
+            jqDialog('retorno/edit_retorno.php','html','GET','Editar Retornos');
             break;
         case 'tr-controle':
-            jqDialog('edit_controle.php','html','GET','Editar Controle');
+            jqDialog('controle/edit_controle.php','html','GET','Editar Controle');
             break;
     }
     console.log(tipo);

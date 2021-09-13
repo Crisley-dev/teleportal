@@ -18,10 +18,14 @@ $feedback = filter_input(INPUT_POST,'feedback');
 
 $user = filter_input(INPUT_POST,'user');
 
+$id = filter_input(INPUT_POST,'id');
+
 
 
 $msg = "";
 $msg .="<div class='container corpo'>";
+$msg .= "<input type='hidden' id='agd_user' name='agd_user' value='".$user."'>";
+$msg .= "<input type='hidden' id='agd_id' name='agd_id' value='".$id."'>";
 $msg .= "<div class='row'>";
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Dia</label></div><input type='date' class='form-control' id='agd_dia' name='agd_dia' value='$dia'></div>";
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Horario</label></div><input type='time' class='form-control' id='agd_horario' name='agd_horario' value='$horario'></div>";
@@ -42,51 +46,8 @@ $msg .= "<div class='col col-sm-10 campo'></div>";
 $msg .= "<div class='col col-sm-2 campo'><button type='button' class='btn botao btn-outline-success' id='edit_agd_btn'>Salvar</button></div>";
 $msg .= "</div>";
 
-$msg .= "<script>
-    jQuery('#edit_agd_btn').on('click',function(){
-    jQuery.ajax({
-        type: 'post',
-        url: '../../teleportal/edit_agd.php',
-        dataType: 'html',
-        data:{
-            'dia':jQuery('#agd_dia').val(),
-            'horario':jQuery('#agd_horario').val(),
-            'nome':jQuery('#agd_nome').val(),
-            'data_nasc':jQuery('#agd_datanasc').val(),
-            'whatsapp':jQuery('#agd_whatsapp').val(),
-            'obs':jQuery('#agd_obs').val(),
-            'feedback':jQuery('#agd_feedback').val(),
-            'usuario': '$user'
-        },
-        success: function (response) {
-            jQuery.alert({
-                title: 'Sucesso',
-                content: '<h3>Agendamento salvo com sucesso!</h3>'+response,
-                theme: 'green',
-                type: 'green',
-                buttons:{
-                    'OK':{
-                        text:'OK',
-                        btnClass: 'btn-green',
-                        action: function(){
-                            location.reload();
-                        }
-                    }
-                }
-            })
-        },
-        error: ()=>{
-            jQuery.alert({
-                title: 'ERROR',
-                content: '<h3>Ocorreu um erro ao tentar salvar os dados.<br/> Tente novamente ou entre em conteto com um Administrador</h3>' + response,
-                theme: 'red',
-                type: 'red'
-            })
-        }
-    });
-});
+$msg .= "<script src='../../teleportal/app/agendamento/js/edit.js'></script>";
 
-</script>";
 echo $msg;
 
 ?>

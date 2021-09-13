@@ -16,40 +16,33 @@
 
 <script src="../../teleportal/function.js"></script>
 
-
 <body>
     <div class="container main">
 
-        <table class="table table-hover nowrap" id="tb_contatos">
+        <table class="table table-hover nowrap" id="tb_controle">
                 <thead class='table-title'>
-                        <th>NOME</th>
-                        <th>CONTATO</th>
-                        <th>FONTE</th>
-                        <th>FEEDBACK</th>
+                        <th>DIA</th>
+                        <th>AGENDAMENTO</th>
+                        <th>VISITA</th>
+                        <th>VENDA</th>
                 </thead>
                 <tbody>
-                        <tr name='tr-contatos'>
-                                <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                <td><i class="fas fa-clock    "></i></td>
-                                <td><i class="fas fa-notes-medical    "></i></td>
+                        <tr name='tr-controle'>
                                 <td></td>
-                        </tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                
 
-                        <tr name='tr-contatos'>
-                                <td><i class="fa fa-calendar" aria-hidden="true"></i></td>
-                                <td><i class="fas fa-clock    "></i></td>
-                                <td><i class="fas fa-notes-medical    "></i></td>
-                                <td></td>
                         </tr>
                 </tbody>
                <footer>
                    <div class="row">
                        <div class="col col-sm-10"></div>
                        <div class="col col-sm-2">
-                        
-                    <a href="#" class="float" id="ct-novo">
-                    <i class="fa fa-plus my-float"></i>
-                    </a>
+                                <a href="#" class="float" id="cont-novo">
+                                <i class="fa fa-plus my-float"></i>
+                                </a>
                        </div>
                    </div>
                </footer>

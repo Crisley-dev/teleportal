@@ -2,12 +2,18 @@
 /**
  *@author CRISLEY DUARTE DA SILVA <crisley.dev@gmail.com>
  *@copyright 2021 - CRISLEY DUARTE DA SILVA
- *UPDATE DE AGENDAMENTOS.
+ 
+ *ARQUIVO DE GERENCIAMENTO DE INCLUSÃO DE NOVOS AGENDAMENTOS
 
  **/
 
-require_once "connection.php";
+ //Import da Constante PATH e arquivo de conexão com o BD
 
+include "C:/xampp/htdocs/teleportal/config.php";
+require_once PATH . "/connection.php";
+
+
+//Captura de Dados Enviados pelo Ajax
 
 $dia = filter_input(INPUT_POST,'dia');
 
@@ -25,9 +31,13 @@ $feedback = filter_input(INPUT_POST,'feedback');
 
 $user = filter_input(INPUT_POST,'usuario');
 
+--//
 
-$sql = "UPDATE agendamentos set dia=?,horario=?,nome=?,data_nasc=?,whatsapp=?,obs=?,feedback=? WHERE usuario = ?";
-echo $horario;
+//Query de Inserção de dados no BD
+/**
+ * TODO(VERIFICAÇÃO DADOS VAZIOS)
+ */
+$sql = "INSERT INTO agendamentos (dia,horario,nome,data_nasc,whatsapp,obs,feedback,usuario) VALUES (?,?,?,?,?,?,?,?)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$dia,$horario,$nome,$data_nasc,$whats,$obs,$feedback,$user]);
 $stmt = null;
