@@ -1,3 +1,5 @@
+<?php //ARQUIVO DE IMPORTAÇÃO DE COMPLEMENTOS FRONT END (CSS, JS, BOOTSTRAP E PLUGINS) ?>
+
 
 <link rel="stylesheet" href="/teleportal/style.css">
 

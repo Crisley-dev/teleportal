@@ -13,7 +13,7 @@ jQuery('#insert_agd_btn').on('click',function(){
     //no banco de dados
     jQuery.ajax({
         type: 'post',
-        url: './../teleportal/app/agendamento/insert_agendamento.php',
+        url: '../../teleportal/app/agendamento/insert_agendamento.php',
         dataType: 'html',
         data:{
             'dia':jQuery('#agd_dia').val(),

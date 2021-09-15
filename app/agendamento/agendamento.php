@@ -21,12 +21,12 @@ $sql = "SELECT id, date_format(dia, '%d/%m/%Y') as dia,horario,nome,date_format(
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user]);
 $data = $stmt->fetchAll();
-?>~
+?>
 
-<?= //Montagem da tabela utilizando HTML5 e PHP ?>
+<?php //Montagem da tabela utilizando HTML5 e PHP ?>
 
 <body>
-<input type="hidden" name="user" id="user" value="<?= $user;?>">
+<input type="hidden" name="user" id="user" value="<?php echo $user;?>">
     <div class="container main">
 
         <table class="table table-hover nowrap" id="tb_agendamento">
@@ -47,14 +47,14 @@ $data = $stmt->fetchAll();
                        foreach($data as $dado):
                                ?>
                         <tr name='tr-agend'>
-                                <td><?= $dado['dia'];?></td>
-                                <td><?= $dado['horario'];?></td>
-                                <td><?= $dado['nome'];?></td>
-                                <td><?= $dado['data_nasc'];?></td>
-                                <td><?= $dado['whatsapp'];?></td>
-                                <td><?= $dado['obs'];?></td>
-                                <td><?=$dado['feedback'];?></td>
-                                <td style='display:none;'><?= $dado['id'];?></td>
+                                <td><?php echo $dado['dia'];?></td>
+                                <td><?php echo $dado['horario'];?></td>
+                                <td><?php echo $dado['nome'];?></td>
+                                <td><?php echo $dado['data_nasc'];?></td>
+                                <td><?php echo $dado['whatsapp'];?></td>
+                                <td><?php echo $dado['obs'];?></td>
+                                <td><?php echo$dado['feedback'];?></td>
+                                <td style='display:none;'><?php echo $dado['id'];?></td>
                         </tr>
                         <?php
                         //Finaliza o foreach.
@@ -63,7 +63,7 @@ $data = $stmt->fetchAll();
                         ?>
                 </tbody>
                <footer>
-                       <?= //Cria o Botão Flutuante no canto da tela ?>
+                       <?php //Cria o Botão Flutuante no canto da tela ?>
                        
                        <a href="#" class="float" id="novo">
                        <i class="fa fa-plus my-float"></i>

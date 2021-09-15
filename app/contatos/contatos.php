@@ -1,10 +1,21 @@
 <?php
-include "imports.php";
-require "connection.php";
-$current_user = wp_get_current_user();
-$user = $current_user->data->user_login;
+/**
+ *@author CRISLEY DUARTE DA SILVA <crisley.dev@gmail.com>
+ *@copyright 2021 - CRISLEY DUARTE DA SILVA
+ */
 
-$sql = "SELECT nome,contato,fonte,feedback FROM contatos where usuario = ?";
+ //Importa a constante de diretorio 'PATH' do arquivo config
+
+ include "C:/xampp/htdocs/teleportal/config.php";
+ include_once PATH . "/imports.php";
+ require_once PATH . "/connection.php";
+ 
+ //Função wordpress de recuperar o login do usuario logado
+ 
+ $current_user = wp_get_current_user();
+ $user = $current_user->data->user_login;
+
+$sql = "SELECT id,nome,contato,fonte,feedback FROM contatos where usuario = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user]);
 $data = $stmt->fetchAll();
@@ -21,10 +32,11 @@ $data = $stmt->fetchAll();
                         <th>CONTATO</th>
                         <th>FONTE</th>
                         <th>FEEDBACK</th>
+                        <th style='display:none;'>ID</th>
                 </thead>
                 <tbody>
                         <?php
-                        foreach($data as $dado){
+                        foreach($data as $dado):
 
                         ?>
                         <tr name='tr-contatos'>
@@ -32,9 +44,10 @@ $data = $stmt->fetchAll();
                                 <td><?php echo $dado['contato'];?></td>
                                 <td><?php echo $dado['fonte'];?></td>
                                 <td><?php echo $dado['feedback'];?></td>
+                                <td style='display:none;'><?php echo $dado['id'];?></td>
                         </tr>
                         <?php
-                        }
+                        endforeach;
                         ?>
                 </tbody>
                <footer>

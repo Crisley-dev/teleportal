@@ -1,3 +1,4 @@
+/* Botão Flutuante*/
 .float{
 	position:fixed;
 	width:60px;
@@ -12,6 +13,7 @@
 	box-shadow: 2px 2px 3px #999;
   z-index:1000;
 }
+/* Hover do Botão Flutuante*/
 .float:hover{
 	background-color: #FFF;
 	color: #ca831f;
@@ -21,10 +23,12 @@
 	margin-top:16px;
 }
 
+/* Cabeçalho das tabelas */
 .table-title{
     background-color:#ca831f ;
 }
 
+/* Container da Pagina */
 .main{
     margin: auto;
     justify-content: center;
@@ -36,6 +40,7 @@ table{
     margin-right: 60px;
 }
 
+/* Container das paginas de editção */
 .corpo{
 	margin: auto;
 	justify-content: center;
@@ -45,6 +50,7 @@ table{
 .campo{
 	margin: auto;
 }
+/* Label das paginas de cadastro e edição */
 .cad-label{
 	border-style: solid;
 	border-width: 1px;
@@ -57,6 +63,7 @@ table{
 label {
 	font-weight: bold;
 }
+/* Campo Select */
 #agd_feedback{
 	-webkit-appearance: none;
     -moz-appearance: none;
@@ -74,6 +81,7 @@ label {
     width: 100%;
 }
 
+/* Botão de Submit */
 .botao{
 	border-color: #ca831f !important;
 	border-width: 1px !important;
@@ -85,14 +93,17 @@ label {
 	margin-top: 45px !important;
 
 }
+/* Hover botão submit */
 .botao:hover{
 	background-color: #ac6d14 !important;
 	text-decoration: none;
 }
+/* Titulo da pagina do WP */
 h1.entry-title{
 	font-size: 75px !important;
 	font-weight: bold !important;
 }
+/* Linhas e celulas das tabelas */
 td,tr{
 	text-align: center !important;
 }

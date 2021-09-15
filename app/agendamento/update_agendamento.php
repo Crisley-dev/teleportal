@@ -31,7 +31,7 @@ $user = filter_input(INPUT_POST,'usuario');
 
 $id = filter_input(INPUT_POST, 'id');
 
---//
+//
 
 //Query Update de atualização de dados no BD Baseado no usuario e ID do agendamento
 $sql = "UPDATE agendamentos set dia=?,horario=?,nome=?,data_nasc=?,whatsapp=?,obs=?,feedback=? WHERE usuario = ? and id=?";

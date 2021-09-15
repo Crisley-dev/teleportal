@@ -31,7 +31,7 @@ $feedback = filter_input(INPUT_POST,'feedback');
 
 $user = filter_input(INPUT_POST,'usuario');
 
---//
+//
 
 //Query de Inserção de dados no BD
 /**

@@ -3,9 +3,13 @@
  *@author CRISLEY DUARTE DA SILVA <crisley.dev@gmail.com>
  *@copyright 2021 - CRISLEY DUARTE DA SILVA
 
+ *UPDATE DE AGENDAMENTOS.
+
  **/
 
-require_once "connection.php";
+//Importação da constante PATH e arquivo de conexão ao BD
+include "C:/xampp/htdocs/teleportal/config.php";
+require_once PATH . "/connection.php";
 
 
 $nome = filter_input(INPUT_POST,'nome');
@@ -18,10 +22,15 @@ $feedback = filter_input(INPUT_POST,'feedback');
 
 $user = filter_input(INPUT_POST,'usuario');
 
+$id = filter_input(INPUT_POST,'id');
 
-$sql = "INSERT INTO contatos (nome,contato,fonte,feedback,usuario) VALUES (?,?,?,?,?)";
+var_dump($user);
+
+
+
+$sql = "UPDATE contatos set nome=?,contato=?,fonte=?,feedback=? WHERE usuario = ? and id=?";
 $stmt = $pdo->prepare($sql);
-$stmt->execute([$nome,$contato,$fonte,$feedback,$user]);
+$stmt->execute([$nome,$contato,$fonte,$feedback,$user,$id]);
 $stmt = null;
 
 ?>
