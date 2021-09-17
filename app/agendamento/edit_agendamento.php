@@ -1,7 +1,8 @@
 <?php
 $dia = filter_input(INPUT_POST,'dia');
-$aux = strtotime($dia);
-$dia = date('Y-m-d',$aux);
+$dt = DateTime::createFromFormat('d/m/Y', $dia);
+$dia = $dt->format('Y-m-d');
+
 $horario = filter_input(INPUT_POST,'horario');
 
 $nome = filter_input(INPUT_POST,'nome');

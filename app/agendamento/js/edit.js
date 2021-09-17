@@ -24,7 +24,7 @@ jQuery('#edit_agd_btn').on('click',function(){
         success: function (response) {
             jQuery.alert({
                 title: 'Sucesso',
-                content: '<h3>Agendamento salvo com sucesso!</h3>'+response,
+                content: 'Agendamento salvo com sucesso!'+response,
                 theme: 'green',
                 type: 'green',
                 buttons:{
@@ -43,7 +43,7 @@ jQuery('#edit_agd_btn').on('click',function(){
         error: (response)=>{
             jQuery.alert({
                 title: 'ERROR',
-                content: '<h3>Ocorreu um erro ao tentar salvar os dados.<br/> Tente novamente ou entre em conteto com um Administrador</h3>' + response,
+                content: '<h4>Ocorreu um erro ao tentar salvar os dados.<br/> Tente novamente ou entre em conteto com um Administrador</h4>' + response,
                 theme: 'red',
                 type: 'red'
             })

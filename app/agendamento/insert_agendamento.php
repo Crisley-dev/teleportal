@@ -37,9 +37,22 @@ $user = filter_input(INPUT_POST,'usuario');
 /**
  * TODO(VERIFICAÇÃO DADOS VAZIOS)
  */
+
+ if ($feedback == 'Fechado'){
+     $sql1 = "INSERT INTO vendas (nome, data_venda, observacao, usuario) VALUES (?,?,?,?)";
+     $stmt1 = $pdo->prepare($sql1);
+     $stmt1->execute([$nome,$dia,$obs,$user]);
+ }
+ if ($feedback ==  'Retorno'){
+     $sql = "INSERT INTO retorno (dia,horario,nome,usuario) VALUES (?,?,?,?)";
+     $stmt = $pdo->prepare($sql);
+     $stmt->execute([$dia,$horario,$nome,$user]);
+     $stmt = '';
+ }
+ 
 $sql = "INSERT INTO agendamentos (dia,horario,nome,data_nasc,whatsapp,obs,feedback,usuario) VALUES (?,?,?,?,?,?,?,?)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$dia,$horario,$nome,$data_nasc,$whats,$obs,$feedback,$user]);
-$stmt = null;
+$stmt = '';
 
 ?>

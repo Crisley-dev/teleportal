@@ -1,17 +1,17 @@
 /* Botão Flutuante*/
 .float{
 	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:80px;
-	right:40px;
-	background-color:#ca831f;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-  font-size:30px;
-	box-shadow: 2px 2px 3px #999;
-  z-index:1000;
+	width:60px !important;
+	height:60px !important;
+	bottom:80px !important;
+	right:40px !important;
+	background-color:#ca831f !important;
+	color:#FFF !important;
+	border-radius:50px !important;
+	text-align:center !important;
+  font-size:30px !important;
+	box-shadow: 2px 2px 3px #999 !important;
+  z-index:1000 !important;
 }
 /* Hover do Botão Flutuante*/
 .float:hover{
@@ -20,7 +20,7 @@
 }
 
 .my-float{
-	margin-top:16px;
+	margin-top:16px !important;
 }
 
 /* Cabeçalho das tabelas */
@@ -30,10 +30,10 @@
 
 /* Container da Pagina */
 .main{
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    display: block;
+    margin: auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+    display: block !important;
 }
 
 table{
@@ -42,10 +42,10 @@ table{
 
 /* Container das paginas de editção */
 .corpo{
-	margin: auto;
-	justify-content: center;
-	align-items: center;
-	display: block;
+	margin: auto !important;
+	justify-content: center !important;
+	align-items: center !important;
+	display: block !important;
 }
 .campo{
 	margin: auto;
@@ -63,7 +63,7 @@ table{
 label {
 	font-weight: bold;
 }
-/* Campo Select */
+/* Campo Select 
 #agd_feedback{
 	-webkit-appearance: none;
     -moz-appearance: none;
@@ -80,7 +80,7 @@ label {
     padding: 1.5rem 1.8rem;
     width: 100%;
 }
-
+*/
 /* Botão de Submit */
 .botao{
 	border-color: #ca831f !important;
@@ -106,4 +106,18 @@ h1.entry-title{
 /* Linhas e celulas das tabelas */
 td,tr{
 	text-align: center !important;
+	font-weight: bold;
+}
+input,#agd_feedback{
+	height: 55px;
+	justify-content: center !important;
+	align-items: center !important;
+	text-align: center !important;
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+
+
+}
+.row{
+	justify-content: space-between !important;
 }

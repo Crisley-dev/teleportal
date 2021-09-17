@@ -1,6 +1,6 @@
 jQuery(function(){
     let path =  '../../teleportal/app/';
-    jQuery('#tb_agendamento,#tb_contatos,#tb_vendas,#tb_retorno,#tb_controle').DataTable();
+    jQuery('#tb_contatos,#tb_vendas,#tb_retorno,#tb_controle').DataTable();
 
     function jqDialog(url, type,method,title){
         jQuery.dialog({
@@ -159,7 +159,37 @@ jQuery('tr').on('click', function () {
             });
             break;
         case 'tr-retorno':
-            jqDialog('retorno/edit_retorno.php','html','GET','Editar Retornos');
+            let ret_nome = jQuery(this).find("td:eq(2)").text();
+            let ret_dia = jQuery(this).find("td:eq(0)").text();
+            let ret_horario = jQuery(this).find("td:eq(1)").text();
+            let ret_id  = jQuery(this).find("td:eq(3)").text();
+
+            jQuery.dialog({
+                content: function () {
+                    var self = this;
+                    return jQuery.ajax({
+                        url: path+'retorno/edit_retorno.php',
+                        dataType: 'html',
+                        method: 'post',
+                        data: {
+                            'nome': ret_nome,
+                            'dia': ret_dia,
+                            'horario': ret_horario,
+                            'user':user,
+                            'id': ret_id
+                     }
+                    }).done(function (response) {
+                        self.setContent(response);
+                        self.setTitle('Editar Retorno');
+                    }).fail(function(){
+                      
+                        self.setContent('Something went wrong.');
+                    });
+                },
+                boxWidth: '70%',
+                useBootstrap: false,
+                type: 'orange'
+            });
             break;
         case 'tr-controle':
             let cont_dia = jQuery(this).find("td:eq(0)").text();
@@ -197,6 +227,35 @@ jQuery('tr').on('click', function () {
             break;
     }
  })
+ //Data filter
+ moment().format();
+
+table = jQuery('#tb_agendamento').DataTable({});
+
+// Extend dataTables search
+jQuery.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min  = jQuery('#min-date').val();
+        var max  = jQuery('#max-date').val();
+        var dia = data[0] || 0; // coluna da tabela com o campo data
+
+        console.log(dia);
+
+        if  ( 
+                ( min == "" || max == "" )
+                || 
+                ( moment(dia).isSameOrAfter(min) && moment(dia).isSameOrBefore(max) ) 
+            )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+// Re-draw the table when the a date range filter changes
+$('.date-range-filter').change( function() {
+    table.draw();
+} );
+
 })
-''
 

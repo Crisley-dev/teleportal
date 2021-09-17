@@ -17,7 +17,7 @@ $user = $current_user->data->user_login;
 
 //Querry SQL para recuperação de dados do Banco.
 
-$sql = "SELECT id, date_format(dia, '%d/%m/%Y') as dia,horario,nome,date_format(data_nasc,'%d/%m/%Y') as data_nasc,whatsapp,obs,feedback FROM agendamentos where usuario = ?";
+$sql = "SELECT id,dia,horario,nome,date_format(data_nasc,'%d/%m/%Y') as data_nasc,whatsapp,obs,feedback FROM agendamentos where usuario = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user]);
 $data = $stmt->fetchAll();
@@ -28,7 +28,23 @@ $data = $stmt->fetchAll();
 <body>
 <input type="hidden" name="user" id="user" value="<?php echo $user;?>">
     <div class="container main">
+   <table>
+           <thead>
+                   <th>Data Inicio</th>
+                   <th>-</th>
+                   <th>Data Fim</th>
+           </thead>
+           <tbody>
+                   <tr>
+                   <td> <input type="date" id="min-date" class="date-range-filter"></td>
+                   <td></td>
+                   <td> <input type="date" id="max-date" class="date-range-filter"></td>
+                   </tr>
+           </tbody>
+   </table>             
+       
 
+        
         <table class="table table-hover nowrap" id="tb_agendamento">
                 <thead class='table-title'>
                         <th>DIA</th>
@@ -45,20 +61,37 @@ $data = $stmt->fetchAll();
                        //foreach de popular a tabela.
 
                        foreach($data as $dado):
+                                if($dado['feedback'] == 'Fechado'):
                                ?>
-                        <tr name='tr-agend'>
+                        <tr name='tr-agend' style='background-color:#06a10e; color: #FFF'>
+                                <?php endif;
+                                if($dado['feedback'] == 'Foi e nao fechou'):
+                                ?>
+                        <tr name='tr-agend' style='background-color:#d62d82'>
+                                <?php endif;
+                                if($dado['feedback'] == 'Confirmado'):
+                                ?>
+                        <tr name='tr-agend' style='background-color:#e1e813'>
+                                <?php endif;
+                                if($dado['feedback'] == 'Retorno'):
+                                ?>
+                        <tr name='tr-agend' style='background-color:#cf0ca1; color: #FFF'>
+                                <?php endif;
+                                if($dado['feedback'] == 'Cancelamento'):
+                                ?>
+                        <tr name='tr-agend' style='background-color:#cc1208; color: #FFF'>
+                                <?php endif; ?>
                                 <td><?php echo $dado['dia'];?></td>
                                 <td><?php echo $dado['horario'];?></td>
                                 <td><?php echo $dado['nome'];?></td>
                                 <td><?php echo $dado['data_nasc'];?></td>
                                 <td><?php echo $dado['whatsapp'];?></td>
                                 <td><?php echo $dado['obs'];?></td>
-                                <td><?php echo$dado['feedback'];?></td>
+                                <td><?php echo $dado['feedback'];?></td>
                                 <td style='display:none;'><?php echo $dado['id'];?></td>
                         </tr>
                         <?php
                         //Finaliza o foreach.
-
                        endforeach;
                         ?>
                 </tbody>
