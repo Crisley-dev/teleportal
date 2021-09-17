@@ -1,6 +1,6 @@
 jQuery(function(){
     let path =  '../../teleportal/app/';
-    jQuery('#tb_contatos,#tb_vendas,#tb_retorno,#tb_controle').DataTable();
+    jQuery('#tb_contatos,#tb_retorno,#tb_controle').DataTable();
 
     function jqDialog(url, type,method,title){
         jQuery.dialog({
@@ -230,21 +230,25 @@ jQuery('tr').on('click', function () {
  //Data filter
  moment().format();
 
-table = jQuery('#tb_agendamento').DataTable({});
+table_agd = jQuery('#tb_agendamento').DataTable({});
+table_venda = jQuery('#tb_vendas').DataTable({});
 
 // Extend dataTables search
 jQuery.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var min  = jQuery('#min-date').val();
         var max  = jQuery('#max-date').val();
-        var dia = data[0] || 0; // coluna da tabela com o campo data
+        var agend = data[8] || 0; // coluna da tabela com o campo data
+        var venda = data[4] || 0;
 
-        console.log(dia);
+        console.log(agend);
 
         if  ( 
                 ( min == "" || max == "" )
                 || 
-                ( moment(dia).isSameOrAfter(min) && moment(dia).isSameOrBefore(max) ) 
+                ( moment(agend).isSameOrAfter(min) && moment(agend).isSameOrBefore(max) )
+                ||
+                ( moment(venda).isSameOrAfter(min) && moment(venda).isSameOrBefore(max) ) 
             )
         {
             return true;
@@ -253,9 +257,14 @@ jQuery.fn.dataTable.ext.search.push(
     }
 );
 // Re-draw the table when the a date range filter changes
-$('.date-range-filter').change( function() {
-    table.draw();
+jQuery('.date-range-filter-agd').change( function() {
+    table_agd.draw();
+
 } );
 
+jQuery('.date-range-filter-vd').change( function() {
+    table_venda.draw();
+
+} );
 })
 
