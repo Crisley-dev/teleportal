@@ -16,32 +16,21 @@ require_once PATH . "/connection.php";
 $current_user = wp_get_current_user();
 $user = $current_user->data->user_login;
 
-$sql = "SELECT nome,grupo from tb_usuarios where cpf = ?";
+$sql = "SELECT nome from tb_usuarios";
 $stmt = $pdo->prepare($sql);
-$stmt->execute([$user]);
-$data = $stmt->fetch();
-$grupo = $data['grupo'];
-
-$sql2 = "SELECT cpf,nome from tb_usuarios";
-$stmt2 = $pdo->prepare($sql2);
-$stmt2->execute();
-$tele = $stmt2->fetchAll();
-
+$stmt->execute();
+$data = $stmt->fetchAll();
 
 ?>
 <input type="hidden" name="user" id="user" value="<?php echo $user;?>">
-<input type="hidden" name="grupo" id="grupo" value="<?php echo $grupo;?>">
 <table>
            <thead>
                    <th>Data Inicio</th>
                    <th>-</th>
                    <th>Data Fim</th>
-                   <th>-</th>
-                   <?php if($grupo == 'adm'): ?>
-                   <th>Tele</th>
-                   <th>-</th>
                    <th></th>
-                   <?php endif; ?>
+                   <th>Tele</th>
+                   <th></th>
            </thead>
            <tbody>
                    <tr>
@@ -49,20 +38,20 @@ $tele = $stmt2->fetchAll();
                    <td></td>
                    <td> <input type="date" id="data-fim"></td>
                    <td></td>
-                   <?php if($grupo == 'adm'):?>
-                        <td><select class="form-control" style="height:55px;border:solid;border-width: 1px; width:150px; text-align: center; font-size: 20px;" name="tele" id="tele">
+                   <td><select name="tele" id="tele">
                        <option value=""></option>
                        <?php
-                       foreach($tele as $dados):
+                       foreach($data as $dados):
                        ?>
-                       <option value="<?php echo $dados['cpf']; ?>"><?php echo $dados['nome']; ?></option>
-                       <?php endforeach; endif; ?>
-                       <td></td>
-                   <td><button class="botao_gerar" id="gerar-relat">Gerar</button></td>
+                       <option value="<?php echo $dados['nome']; ?>"><?php echo $dados['nome']; ?></option>
+                       <?php endforeach; ?>
+                   </select></td>
+                   <td></td>
+                   <td><button class="botao_gerar" id="gerar-relat">Gerar</button></td>nd
                    </tr>
            </tbody>
    </table>            
 
-   <div class="tb-relat">
+   <div class="tb-relat-adm">
        
    </div>

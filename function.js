@@ -270,14 +270,33 @@ jQuery('.date-range-filter-vd').change( function() {
 //Função ajax que envia as datas para gerar tabela de relatorio
 
 jQuery('#gerar-relat').on('click',function(){
-    let user = jQuery('#user').val();
+    let grupo = jQuery('#grupo').val();
+    if(grupo === 'adm'){
+        var user = jQuery('#tele').val()
+    }
+    else{
+        var user = jQuery('#user').val();
+    }
+    var inicio = jQuery('#data-inicio').val();
+    var fim = jQuery('#data-fim').val();
+
+    if((inicio === '') || (fim === '')){
+        jQuery.alert({
+            title: 'Alerta',
+            content: '<h3>Escolha uma data valida</h3>',
+            type: 'orange'
+        });
+    }else{
+
+    
     jQuery.ajax({
         type: "post",
         url: path+"resumo/relatorio.php",
         data: {
             'user':user,
-            'data_inicio':jQuery('#data-inicio').val(),
-            'data_fim':jQuery('#data-fim').val()
+            'data_inicio': inicio,
+            'data_fim': fim,
+            'grupo': jQuery('#grupo').val()
         },
         dataType: "html",
         success: function (response) {
@@ -285,6 +304,7 @@ jQuery('#gerar-relat').on('click',function(){
             jQuery('.tb-relat').append(response);
         }
     });
+}
 })
 })
 
