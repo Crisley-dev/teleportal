@@ -266,5 +266,25 @@ jQuery('.date-range-filter-vd').change( function() {
     table_venda.draw();
 
 } );
+
+//Função ajax que envia as datas para gerar tabela de relatorio
+
+jQuery('#gerar-relat').on('click',function(){
+    let user = jQuery('#user').val();
+    jQuery.ajax({
+        type: "post",
+        url: path+"resumo/relatorio.php",
+        data: {
+            'user':user,
+            'data_inicio':jQuery('#data-inicio').val(),
+            'data_fim':jQuery('#data-fim').val()
+        },
+        dataType: "html",
+        success: function (response) {
+            jQuery('.tb-relat').empty();
+            jQuery('.tb-relat').append(response);
+        }
+    });
+})
 })
 
