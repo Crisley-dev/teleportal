@@ -1,7 +1,7 @@
 <?php
 $dia = filter_input(INPUT_POST,'dia');
-//$dt = DateTime::createFromFormat('d/m/Y', $dia);
-//$dia = $dt->format('Y-m-d');
+$dt = DateTime::createFromFormat('d/m/Y', $dia);
+$dia = $dt->format('Y-m-d');
 
 $horario = filter_input(INPUT_POST,'horario');
 
@@ -36,7 +36,7 @@ $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Nome</lab
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Data Nasc.</label></div><input type='date' class='form-control' id='agd_datanasc' name='agd_datanasc' value='$data_nasc'></div>";
 $msg .= "</div>";
 $msg .= "<div class='row'>";
-$msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Whatsapp</label></div><input type='text' class='form-control' id='agd_whatsapp' name='agd_whatsapp' value='$whats'></div>";
+$msg .= "<div class='col col-sm-4 campo'><a class='whats' href='https://wa.me/+55$whats' target='_blank'><div class='cad-label lb-whats'><label style='color:#3a616b !important'>Whatsapp <i class='fa fa-whatsapp' aria-hidden='true'></i></label></div></a><input type='text' class='form-control' id='agd_whatsapp' name='agd_whatsapp' value='$whats'></div>";
 $msg .= "<div class='col col-sm-4 campo'><div class='cad-label'><label>Feedback</label></div><select class='form-select' name='agd_feedback' id='agd_feedback'><option value='$feedback'>$feedback</option><option value='Fechado'>Fechado</option><option value='Foi e nao fechou'>Visita sem Fechamento</option><option value='Confirmado'>Confirmado</option><option value='Retorno'>Retorno</option><option value='Cancelamento'>Cancelamento</option></select></div>";
 $msg .= "</div>";
 $msg .= "<div class='row'>";

@@ -131,3 +131,16 @@ input,#agd_feedback{
 .row{
 	justify-content: space-between !important;
 }
+
+.whats{
+	text-decoration: none !important;
+}
+.whats:link{
+	text-decoration: none;
+	color: #000;
+}
+.lb-whats:hover{
+	text-decoration: none;
+	background-color: #06a10e !important;
+	color: #FFF !important;
+}

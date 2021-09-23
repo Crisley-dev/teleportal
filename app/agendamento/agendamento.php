@@ -86,7 +86,7 @@ $data = $stmt->fetchAll();
                                 <td><?php echo $dado['horario'];?></td>
                                 <td><?php echo $dado['nome'];?></td>
                                 <td><?php echo $dado['data_nasc'];?></td>
-                                <td><a href="https://wa.me/+55<?php echo  preg_replace('/[^a-zA-Z0-9]+/', '', $dado['whatsapp']);?>" target="_blank"><?php echo $dado['whatsapp'];?></a></td>
+                                <td><?php echo $dado['whatsapp'];?></a></td>
                                 <td><?php echo $dado['obs'];?></td>
                                 <td><?php echo $dado['feedback'];?></td>
                                 <td style='display:none;'><?php echo $dado['id'];?></td>
