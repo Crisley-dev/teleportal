@@ -15,7 +15,7 @@
  $current_user = wp_get_current_user();
  $user = $current_user->data->user_login;
 
-$sql = "SELECT id,nome,date_format(reg_venda,'%Y-%m-%d') as reg_venda,date_format(data_venda, '%d/%m/%Y') as data,observacao from vendas where usuario = ?";
+$sql = "SELECT id,nome,date_format(data_venda,'%Y-%m-%d') as data_filtro,date_format(data_venda, '%d/%m/%Y') as data,observacao from vendas where usuario = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user]);
 $data = $stmt->fetchAll();
@@ -52,7 +52,7 @@ $data = $stmt->fetchAll();
                                 <td><?php echo $dado['data'];?></td>
                                 <td><?php echo $dado['observacao'];?></td>
                                 <td style="display:none;"><?php echo $dado['id'];?></td>
-                                <td style="display:none;"><?php echo $dado['reg_venda'];?></td>
+                                <td style="display:none;"><?php echo $dado['data_filtro'];?></td>
          
                         </tr>
                         <?php endforeach;?>

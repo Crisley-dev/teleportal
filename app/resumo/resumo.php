@@ -16,12 +16,15 @@ require_once PATH . "/connection.php";
 $current_user = wp_get_current_user();
 $user = $current_user->data->user_login;
 
+//Query de seleção do nome e grupo do usuario logado
 $sql = "SELECT nome,grupo from tb_usuarios where cpf = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user]);
 $data = $stmt->fetch();
 $grupo = $data['grupo'];
 
+
+//Query de seleção de todos os cpfs e nomes da tabela de usuarios
 $sql2 = "SELECT cpf,nome from tb_usuarios";
 $stmt2 = $pdo->prepare($sql2);
 $stmt2->execute();
@@ -37,19 +40,24 @@ $tele = $stmt2->fetchAll();
                    <th>-</th>
                    <th>Data Fim</th>
                    <th>-</th>
-                   <?php if($grupo == 'adm'): ?>
+                   <?php
+                   //Adiciona o campo 'tele' caso o grupo do usuario logado seja adm
+                    if($grupo == 'adm'): ?>
                    <th>Tele</th>
                    <th>-</th>
                    <th></th>
                    <?php endif; ?>
            </thead>
            <tbody>
+                   <!-- Campo de filtro por data -->
                    <tr>
                    <td> <input type="date" id="data-inicio"></td>
                    <td></td>
                    <td> <input type="date" id="data-fim"></td>
                    <td></td>
-                   <?php if($grupo == 'adm'):?>
+                   <?php
+                   //Verifica se o grupo é adm e adiciona uma select box com todos so usuarios cadastrados como tele 
+                   if($grupo == 'adm'):?>
                         <td><select class="form-control" style="height:55px;border:solid;border-width: 1px; width:150px; text-align: center; font-size: 20px;" name="tele" id="tele">
                        <option value=""></option>
                        <?php
@@ -62,7 +70,7 @@ $tele = $stmt2->fetchAll();
                    </tr>
            </tbody>
    </table>            
-
+<!-- Div onde é adicionada a tabela resultado da busca. -->
    <div class="tb-relat">
        
    </div>

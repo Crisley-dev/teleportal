@@ -17,7 +17,7 @@ $user = $current_user->data->user_login;
 
 //Querry SQL para recuperação de dados do Banco.
 
-$sql = "SELECT id,date_format(dia,'%d/%m/%Y') as dia,date_format(reg_agendamentos,'%Y-%m-%d') as reg_agendamentos,horario,nome,date_format(data_nasc,'%d/%m/%Y') as data_nasc,whatsapp,obs,feedback FROM agendamentos where usuario = ?";
+$sql = "SELECT id,date_format(dia,'%d/%m/%Y') as dia,date_format(dia,'%Y-%m-%d') as data_filtro,date_format(reg_agendamentos,'%Y-%m-%d') as reg_agendamentos,horario,nome,date_format(data_nasc,'%d/%m/%Y') as data_nasc,whatsapp,obs,feedback FROM agendamentos where usuario = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user]);
 $data = $stmt->fetchAll();
@@ -41,7 +41,8 @@ $data = $stmt->fetchAll();
                    <td> <input type="date" id="max-date" class="date-range-filter-agd"></td>
                    </tr>
            </tbody>
-   </table>             
+   </table>
+           
        
 
         
@@ -90,7 +91,7 @@ $data = $stmt->fetchAll();
                                 <td><?php echo $dado['obs'];?></td>
                                 <td><?php echo $dado['feedback'];?></td>
                                 <td style='display:none;'><?php echo $dado['id'];?></td>
-                                <td style='display:none;'><?php echo $dado['reg_agendamentos'];?></td>
+                                <td style='display:none;'><?php echo $dado['data_filtro'];?></td>
                         </tr>
                         <?php
                         //Finaliza o foreach.
