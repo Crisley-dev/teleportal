@@ -1,4 +1,8 @@
 <?php
+/**
+ * Arquivo responsavel por gerar a tebela de relatorio baseado nos parametros recebidos por ajax utilizando um multi select
+ * com count nos id's das tabelas agendamento, vendas e controle(visitias).
+ */
 
  //Import da Constante PATH e arquivo de conexão com o BD
 
