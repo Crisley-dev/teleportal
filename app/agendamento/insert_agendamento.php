@@ -25,6 +25,8 @@ $data_nasc = filter_input(INPUT_POST,'data_nasc');
 
 $whats = filter_input(INPUT_POST,'whatsapp');
 
+$whats = preg_replace('/[^A-Za-z0-9]/', "", $whats);
+
 $obs = filter_input(INPUT_POST,'obs');
 
 $feedback = filter_input(INPUT_POST,'feedback');

@@ -1,6 +1,10 @@
 jQuery(function(){
+    var a = 0;
     let path =  '../../teleportal/app/';
     jQuery('#tb_contatos,#tb_retorno,#tb_controle').DataTable();
+    jQuery('.whats').on('click',function(){
+        a = 1;
+    })
 
     function jqDialog(url, type,method,title){
         jQuery.dialog({
@@ -45,9 +49,17 @@ jQuery(function(){
         jqDialog('controle/cad_controle.php','html','POST','Cadastrar Controle');
     })
 
-jQuery('tr').on('click', function () { 
+
+jQuery('tr').on('click', function (e) { 
     let tipo = jQuery(this).attr("name");
+    var num = jQuery(this).find("td:eq(4)").text();
     let user = jQuery('#user').val();
+    if(a == 1){
+        e.preventDefault();
+        window.open('https://wa.me/+55'+num);
+        a = 0;
+    }
+    else{
     switch (tipo){
         case 'tr-agend':
             let dia = jQuery(this).find("td:eq(0)").text();
@@ -57,7 +69,7 @@ jQuery('tr').on('click', function () {
             let whats = jQuery(this).find("td:eq(4)").text();
             let obs = jQuery(this).find("td:eq(5)").text();
             let feed = jQuery(this).find("td:eq(6)").text();
-            let id = jQuery(this).find("td:eq(7)").text();
+            let id = jQuery(this).find("td:eq(8)").text();
             jQuery.dialog({
                 content: function () {
                     var self = this;
@@ -225,7 +237,7 @@ jQuery('tr').on('click', function () {
                 type: 'orange'
             });
             break;
-    }
+    }}
  })
  //Data filter
  moment().format();

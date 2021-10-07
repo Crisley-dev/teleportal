@@ -45,7 +45,7 @@ $data = $stmt->fetchAll();
            
        
 
-        
+<div class="table-responsive">
         <table class="table table-hover nowrap" id="tb_agendamento">
                 <thead class='table-title'>
                         <th>DIA</th>
@@ -55,6 +55,7 @@ $data = $stmt->fetchAll();
                         <th>WHATSAPP</th>
                         <th>OBSERVAÇÃO</th>
                         <th>FEEDBACK</th>
+                        <th>MSG</th>
                         <th style='display:none;'>ID</th>
                         <th style='display:none;'>reg</th>
                 </thead>
@@ -65,7 +66,7 @@ $data = $stmt->fetchAll();
                        foreach($data as $dado):
                                 if($dado['feedback'] == 'Fechado'):
                                ?>
-                        <tr name='tr-agend' style='background-color:#06a10e; color: #FFF'>
+                        <tr name='tr-agend' id='tr-agend' style='background-color:#06a10e; color: #FFF'>
                                 <?php endif;
                                 if($dado['feedback'] == 'Foi e nao fechou'):
                                 ?>
@@ -90,6 +91,7 @@ $data = $stmt->fetchAll();
                                 <td><?php echo $dado['whatsapp'];?></a></td>
                                 <td><?php echo $dado['obs'];?></td>
                                 <td><?php echo $dado['feedback'];?></td>
+                                <td><a class='whats' href="https://wa.me/+55<?php echo $dado['whatsapp'];?>" target='_blank'><i style='font-size:30px; color: #FFF; text-decoration:none;' class="fab fa-whatsapp"></i></a></td>
                                 <td style='display:none;'><?php echo $dado['id'];?></td>
                                 <td style='display:none;'><?php echo $dado['data_filtro'];?></td>
                         </tr>
@@ -106,6 +108,7 @@ $data = $stmt->fetchAll();
                        </a>
                </footer>
         </table>
+        </div>
         </div>
 
 </body>
